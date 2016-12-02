@@ -1,6 +1,7 @@
-package com.vilo3.service;
+package com.vilo3.service.impl;
 
 import com.vilo3.model.TTMRate;
+import com.vilo3.service.ITTMRateService;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
