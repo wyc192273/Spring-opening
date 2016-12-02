@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="djNewsProvider" class="com.vilo.provider.FXNewsProvider">
+        <property name="newsListener">
+            <ref bean="djNewsListener"></ref>
+        </property>
+        <property name="newPersistener">
+            <ref bean="djNewsPersister"></ref>
+        </property>
+        <!--<constructor-arg index="0">
+            <ref bean="djNewsListener"/>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <ref bean="djNewsPersister"/>
+        </constructor-arg>-->
+    </bean>
+    <bean id="djNewsListener" class="com.vilo.listener.impl.DowJonesNewsListener">
+    </bean>
+    <bean id="djNewsPersister" class="com.vilo.persister.impl.DowJonesNewsPersister">
+    </bean>
+
+    <bean id="newsBean" class="com.vilo.model.FXNewsBean" scope="prototype" />
+    <bean id="mockPersister" class="com.vilo.persister.impl.MockNewsPersister"  >
+        <!--<lookup-method name="getNewsBean" bean="newsBean" />-->
+        <!--<property name="newsBean" ref="newsBean" />-->
+    </bean>
+
+    <bean id="stringModel" class="com.vilo.model.StringModel" destroy-method="destroy" init-method="init" >
+        <property name="str" value="${StringModel.str}" />
+    </bean>
+
+    <bean class="com.vilo.model.OwnBeanPostProcesser" />
+
+
+
+
+</beans>
